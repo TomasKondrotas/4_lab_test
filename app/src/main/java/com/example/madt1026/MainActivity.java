@@ -11,14 +11,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> listNoteItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ListView lvNotes;
+    Set<String> test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String note = sharedPref.getString(Constants.BASE_NOTE_KEY, "NotSet");
+        test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
+        Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
 
        // this.listNoteItems.clear();
-        this.listNoteItems.add(note);
+        //this.listNoteItems.add(note);
         this.adapter.notifyDataSetChanged();
 
         //In case You will need to append/remove values from array:

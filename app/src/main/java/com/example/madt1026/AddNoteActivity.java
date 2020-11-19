@@ -7,23 +7,42 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class AddNoteActivity extends AppCompatActivity {
 
     EditText edNote;
+    Set<String> test = new HashSet<String>();
+   // Set<String> cars = new HashSet<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
 
+/*
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putStringSet(Constants.BASE_NOTE_KEY, cars);
+        editor.apply();*/
+
         this.edNote = findViewById(R.id.edNote);
     }
 
     public void onBtnSaveAndCloseClick(View view) {
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(Constants.BASE_NOTE_KEY, this.edNote.getText().toString());
+        test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY,null);
+        test.add(edNote.getText().toString());
+        editor.putStringSet(Constants.BASE_NOTE_KEY, test);
+        //Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
         editor.apply();
         finish();
     }
