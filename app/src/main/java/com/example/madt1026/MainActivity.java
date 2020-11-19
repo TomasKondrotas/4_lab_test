@@ -27,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     ListView lvNotes;
     ListView lvNotesC;
-    Set<String> test;
+    Set<String> sharePrefData;
     String[] split;
+    String removeChar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,28 +55,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
-        Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
+        sharePrefData = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
 
         this.listNoteItems.clear();
         this.listNoteItemsC.clear();
         this.adapter.notifyDataSetChanged();
         this.adapterC.notifyDataSetChanged();
-        //this.listNoteItems.addAll(test);
 
-        for(String i : test)
+        for(String i : sharePrefData)
         {
             split = i.split("-");
-            this.listNoteItems.add(Collections.singleton(split[0]).toString());
+
+            removeChar = Collections.singleton(split[0]).toString();
+            removeChar = removeChar.replace("[","");
+            removeChar = removeChar.replace("]","");
+            this.listNoteItems.add(removeChar);
             this.adapter.notifyDataSetChanged();
-            this.listNoteItemsC.add(Collections.singleton(split[1]).toString());
+
+            removeChar = Collections.singleton(split[1]).toString();
+            removeChar = removeChar.replace("[","");
+            removeChar = removeChar.replace("]","");
+            this.listNoteItemsC.add(removeChar);
             this.adapterC.notifyDataSetChanged();
         }
-
-      //  this.adapter.notifyDataSetChanged();
-
-        //In case You will need to append/remove values from array:
-        //https://stackoverflow.com/questions/9648236/android-listview-not-updating-after-a-call-to-notifydatasetchanged
     }
 
     @Override
