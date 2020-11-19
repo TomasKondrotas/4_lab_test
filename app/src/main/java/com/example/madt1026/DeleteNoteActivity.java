@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,9 +42,15 @@ public class DeleteNoteActivity extends AppCompatActivity {
 
         String spSelectedOption = decisionSpinner.getSelectedItem().toString();
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
-        test.remove(spSelectedOption);
-        finish();
+        if(spSelectedOption.isEmpty())
+        {
+            Toast.makeText(this, R.string.emptySpin, Toast.LENGTH_SHORT).show();
+        }
+        {
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
+            test.remove(spSelectedOption);
+            finish();
+        }
     }
 }

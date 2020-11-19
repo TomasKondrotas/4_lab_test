@@ -39,14 +39,21 @@ public class AddNoteActivity extends AppCompatActivity {
 
     public void onBtnSaveAndCloseClick(View view) {
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY,null);
-        parseVal = edNote.getText().toString() + "-"  + edNoteC.getText().toString();
-        test.add(parseVal);
-        editor.putStringSet(Constants.BASE_NOTE_KEY, test);
-        //Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
-        editor.apply();
-        finish();
+        if (edNoteC.getText().toString().isEmpty() || edNote.getText().toString().isEmpty())
+        {
+            Toast.makeText(this, R.string.empty, Toast.LENGTH_SHORT).show();
+        }else
+        {
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
+            parseVal = edNote.getText().toString() + "-" + edNoteC.getText().toString();
+            test.add(parseVal);
+            editor.putStringSet(Constants.BASE_NOTE_KEY, test);
+            //Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
+            editor.apply();
+            finish();
+        }
     }
 }

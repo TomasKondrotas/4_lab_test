@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">4lab</string>
-    <string name="notes_text">Notes</string>
+    <string name="notes_text">Note</string>
     <string name="add_note">Add Note</string>
     <string name="save_and_close">Save and close</string>
     <string name="note_text">Note text</string>
     <string name="del_note">Delete Note</string>
     <string name="content">Content</string>
     <string name="confirm">Confirm</string>
+    <string name="empty">Note name or Content are empty</string>
+    <string name="emptySpin">No chosen value</string>
+
 </resources>
