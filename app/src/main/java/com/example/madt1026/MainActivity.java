@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
         Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
 
-       // this.listNoteItems.clear();
-        //this.listNoteItems.add(note);
+        this.listNoteItems.clear();
+        this.listNoteItems.addAll(test);
         this.adapter.notifyDataSetChanged();
 
         //In case You will need to append/remove values from array:
