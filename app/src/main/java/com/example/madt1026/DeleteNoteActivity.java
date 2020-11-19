@@ -35,7 +35,6 @@ public class DeleteNoteActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, test2);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         decisionSpinner.setAdapter(spinnerArrayAdapter);
-
     }
 
     public void btnDelConfirmClick(View view){
@@ -45,7 +44,6 @@ public class DeleteNoteActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
         test.remove(spSelectedOption);
-
-
+        finish();
     }
 }

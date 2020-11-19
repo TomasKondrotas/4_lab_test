@@ -17,6 +17,8 @@ import java.util.Set;
 public class AddNoteActivity extends AppCompatActivity {
 
     EditText edNote;
+    EditText edNoteC;
+    String parseVal;
     Set<String> test = new HashSet<String>();
    // Set<String> cars = new HashSet<String>();
 
@@ -31,7 +33,7 @@ public class AddNoteActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putStringSet(Constants.BASE_NOTE_KEY, cars);
         editor.apply();*/
-
+        this.edNoteC = findViewById(R.id.edNoteC);
         this.edNote = findViewById(R.id.edNote);
     }
 
@@ -40,7 +42,8 @@ public class AddNoteActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
         test = sharedPref.getStringSet(Constants.BASE_NOTE_KEY,null);
-        test.add(edNote.getText().toString());
+        parseVal = edNote.getText().toString() + "-"  + edNoteC.getText().toString();
+        test.add(parseVal);
         editor.putStringSet(Constants.BASE_NOTE_KEY, test);
         //Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
         editor.apply();

@@ -20,9 +20,15 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> listNoteItems = new ArrayList<>();
+    ArrayList<String> listNoteItemsC = new ArrayList<>();
+
     ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapterC;
+
     ListView lvNotes;
+    ListView lvNotesC;
     Set<String> test;
+    String[] split;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         this.lvNotes = findViewById(R.id.lvNotes);
         this.adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.listNoteItems);
         this.lvNotes.setAdapter(adapter);
+
+        this.lvNotesC = findViewById(R.id.lvNotesC);
+        this.adapterC = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.listNoteItemsC);
+        this.lvNotesC.setAdapter(adapterC);
     }
 
     @Override
@@ -48,8 +58,21 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, test.toString(), Toast.LENGTH_SHORT).show();
 
         this.listNoteItems.clear();
-        this.listNoteItems.addAll(test);
+        this.listNoteItemsC.clear();
         this.adapter.notifyDataSetChanged();
+        this.adapterC.notifyDataSetChanged();
+        //this.listNoteItems.addAll(test);
+
+        for(String i : test)
+        {
+            split = i.split("-");
+            this.listNoteItems.add(Collections.singleton(split[0]).toString());
+            this.adapter.notifyDataSetChanged();
+            this.listNoteItemsC.add(Collections.singleton(split[1]).toString());
+            this.adapterC.notifyDataSetChanged();
+        }
+
+      //  this.adapter.notifyDataSetChanged();
 
         //In case You will need to append/remove values from array:
         //https://stackoverflow.com/questions/9648236/android-listview-not-updating-after-a-call-to-notifydatasetchanged
