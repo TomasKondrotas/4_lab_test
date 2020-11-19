@@ -37,11 +37,13 @@ public class AddNoteActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.empty, Toast.LENGTH_SHORT).show();
         }else
         {
+            //Kadangi duomenų saugojimui naudojamas Hashset elementas, duomenys nebus įrašyti jeigu Note ir Content abu bus tokie patys kaip seniau įrašyti elementai.
 
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = sharedPref.edit();
             sharedPrefData = sharedPref.getStringSet(Constants.BASE_NOTE_KEY, null);
             parseVal = edNote.getText().toString() + "-" + edNoteC.getText().toString();
+            //Note ir Content yra sujungiami įvedant į hashset ir atskiriami įšvedant į listą su split() funkcija. Atskyrimui naudojamas "-" simbolis nepatartina jo naudoti.
             sharedPrefData.add(parseVal);
             editor.putStringSet(Constants.BASE_NOTE_KEY, sharedPrefData);
             editor.apply();

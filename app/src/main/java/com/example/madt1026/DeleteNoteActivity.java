@@ -38,6 +38,7 @@ public class DeleteNoteActivity extends AppCompatActivity {
 
     public void btnDelConfirmClick(View view){
 
+        //Jei SharedPrefrences yra tuščias bandant ištrinti jo elementa activity_delete_note lužta (nors po to atrodo viskas vistiek gerai veikia)
         String spSelectedOption = decisionSpinner.getSelectedItem().toString();
 
         if(spSelectedOption == null || spSelectedOption.isEmpty())
